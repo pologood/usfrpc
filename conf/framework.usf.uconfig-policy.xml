@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<policies>
+	<policy id="globalProperties">
+		<extension type="properties" optional="true">classpath*:usf.properties
+		</extension>
+		<extension type="properties" optional="true">classpath*:/conf/usf.properties
+		</extension>
+		<extension type="properties" optional="true">/WEB-INF/classes/*.usf.properties
+		</extension>
+		<extension type="properties" optional="true">/WEB-INF/conf/*.usf.properties
+		</extension>
+	</policy>
+	<policy id="dynamicProperties">
+  		<default type="properties" optional="true"></default>
+  		<extension type="properties" optional="true">classpath*:dsf.dynamic.config.properties</extension>
+	</policy>
+</policies>

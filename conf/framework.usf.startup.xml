@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fixtures>
+	<fixture key="usf" ai-index="198" bd-index="99" type="factory"
+		after-init-method="init" before-destroy-method="destroy">
+		com.huawei.csc.usf.framework.USFStartup
+	</fixture>
+</fixtures>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<xsd:schema xmlns="http://www.huawei.com/schema/service"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.huawei.com/schema/service"
+	elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<!-- 还是耦合的，有人自己实现了新的内容，还是得跑到core里来改一下， 现在不知道怎样解耦 -->
+	<!-- 一种可能的方法是运行时动态搜集schema信息，再注入， -->
+	<!-- 可是这样一来，ebus名空间就不可能具备自动提示功能了，用户很不方便使用 -->
+	<!-- 而且动态搜集时，需要用一个spring的xml来引导一下，对用户又有了一个xml加载顺序问题，对用户来说更不合理了 -->
+	<!-- 所以目前保持耦合状态 -->
+	<!-- <xsd:include schemaLocation="classpath:META-INF/spring/pojo-spring-ebus.xsd"></xsd:include> -->
+	<!-- <xsd:include schemaLocation="classpath:META-INF/spring/proxy-spring-ebus.xsd"></xsd:include> -->
+
+	<xsd:element name="exporter">
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:element ref="method" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+			<xsd:attribute name="name" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="ref" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="class" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="interface" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="protocol" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="executePool" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="executes" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="tpsThreshold" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="version" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>服务的版本号，服务端精确版本号</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="11"></xsd:maxLength>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="group" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>暴露的服务分组，允许配置多个分组，以英文逗号分隔</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="importer">
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:element ref="method" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+			<xsd:attribute name="name" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="service-name" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="interface" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="protocol" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="service-address" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="router" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="fail-policy" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="registry" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="version" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="url" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="direction" type="xsd:string"></xsd:attribute>
+			<xsd:attribute name="group" type="xsd:string" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>暴露的服务分组，允许配置多个分组，以英文逗号分隔</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="timeout" type="xsd:int"></xsd:attribute>
+			<!--客户端引入method用于设置方法级配置 -->
+		</xsd:complexType>
+	</xsd:element>	<xsd:complexType name="methodType">
+		<xsd:attribute name="name" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[ 方法名 (method.toString()). ]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="timeout" type="xsd:int" use="optional">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[方法调用超时时间 ]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="executes" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[服务端流控最大并发调用数 ]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="tpsThreshold" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[服务端流控最大tps ]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:element name="method" type="methodType">
+		<xsd:annotation>
+			<xsd:documentation><![CDATA[ 服务的方法级配置 ]]></xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

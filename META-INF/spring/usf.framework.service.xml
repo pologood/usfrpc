@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+	<description>usf</description>
+
+	<bean id="usfBusConnector" class="com.huawei.csc.usf.framework.bus.BusConnector" />
+
+	<bean id="usfPojoConnector" class="com.huawei.csc.usf.framework.pojo.PojoConnector" />
+
+	<!-- <bean id="usfSrAgent" class="com.huawei.csc.usf.framework.sr.SRAgentImpl" /> -->
+	<bean id="usfSrAgentFactory" class="com.huawei.csc.usf.framework.sr.SRAgentFactory" />
+	
+	<!-- <bean id="usfZkAdapter" class="com.huawei.csc.usf.framework.sr.UsfZkRegistryAdapter" /> -->
+
+	<bean id="usfCommonSyncConnector"
+		class="com.huawei.csc.usf.framework.invoker.CommonSyncConnector" />
+
+	<bean id="usfCommonAsyncConnector"
+		class="com.huawei.csc.usf.framework.invoker.CommonAsyncConnector" />
+
+	<bean id="poll"
+		class="com.huawei.csc.usf.framework.routing.DefaultServiceAddress">
+	</bean>
+	<bean id="serviceDelayTimeRouter"
+		class="com.huawei.csc.usf.framework.routing.DelayTimeServiceAddress">
+	</bean>
+
+	<bean id="serverWeightRouter"
+		class="com.huawei.csc.usf.framework.routing.WeightServiceAddress">
+	</bean>
+
+	<bean id="usfMessageFactory" class="com.huawei.csc.usf.framework.message.MessageFactoryImpl">
+		<property name="serviceType" value="USF" />
+	</bean>
+
+	<bean id="usfExceptionUtils" class="com.huawei.csc.usf.framework.ExceptionUtils" />
+
+	<bean id="businessExecutorInterceptor"
+		class="com.huawei.csc.usf.framework.interceptor.impl.BusinessExecutorInterceptor">
+	</bean>
+	
+	<bean id="routingInterceptor" class="com.huawei.csc.usf.framework.routing.RoutingInterceptor">
+	</bean>
+
+	<bean id="decodeInterceptor"
+		class="com.huawei.csc.usf.framework.interceptor.impl.DecodeInterceptor">
+	</bean>
+
+	<bean id="encodeInterceptor"
+		class="com.huawei.csc.usf.framework.interceptor.impl.EncodeInterceptor">
+	</bean>
+
+	<bean id="failReturnFaultInterceptor"
+		class="com.huawei.csc.usf.framework.interceptor.impl.FailReturnFaultInterceptor">
+	</bean>
+
+	<bean id="usfPojoServiceRegistry" class="com.huawei.csc.usf.framework.pojo.PojoServiceRegistry"
+		lazy-init="true">
+		<property name="pojoConnector" ref="usfPojoConnector"/>
+	</bean>	
+	
+	<bean id="flowcontrolManager"
+		class="com.huawei.csc.usf.framework.flowcontrol.FlowControlManager"
+		init-method="init" destroy-method="destroy" factory-method="getInstance"> 
+	</bean>
+	
+	<bean id="threadPoolMonitorManagement"
+		class="com.huawei.csc.usf.framework.monitor.jmx.impl.ThreadPoolManagermentImpl"
+		init-method="init" destroy-method="destroy" />
+
+</beans>

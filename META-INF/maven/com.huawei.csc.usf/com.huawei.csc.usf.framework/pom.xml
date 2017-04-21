@@ -1,0 +1,113 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.huawei.csc</groupId>
+		<artifactId>com.huawei.csc.usf</artifactId>
+		<version>3.5.20.SPC001</version>
+	</parent>
+
+	<groupId>com.huawei.csc.usf</groupId>
+	<artifactId>com.huawei.csc.usf.framework</artifactId>
+
+	<properties>
+		<jackson.version>2.4.1</jackson.version>
+	</properties>
+	
+	<dependencies>
+
+		<dependency>
+			<groupId>com.huawei.csc</groupId>
+			<artifactId>com.huawei.csc.remoting</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.huawei.soa.foundation</groupId>
+			<artifactId>com.huawei.soa.foundation.compress</artifactId>
+			<version>${soa.foundation.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.huawei.csc</groupId>
+			<artifactId>com.huawei.csc.kernel.api</artifactId>
+			<version>${csc.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.huawei.csc</groupId>
+			<artifactId>com.huawei.csc.foundation.container.api</artifactId>
+			<version>${csc.version}</version>
+		</dependency>
+
+		<!-- <dependency> <groupId>com.huawei.csc</groupId> <artifactId>com.huawei.csc.kernel</artifactId> 
+			<version>${csc.version}</version> <scope>runtime</scope> </dependency> <dependency> 
+			<groupId>com.huawei.csc</groupId> <artifactId>com.huawei.csc.foundation.container</artifactId> 
+			<version>${csc.version}</version> <scope>runtime</scope> </dependency> -->
+
+		<dependency>
+			<groupId>com.huawei.csc</groupId>
+			<artifactId>com.huawei.csc.foundation.adapter</artifactId>
+			<version>${csc.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.huawei.soa.foundation</groupId>
+					<artifactId>com.huawei.soa.foundation.uoa.adapter</artifactId>
+				</exclusion>
+			</exclusions>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.huawei.soa.foundation</groupId>
+			<artifactId>com.huawei.soa.foundation.om</artifactId>
+			<version>${soa.foundation.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.huawei.soa.foundation</groupId>
+			<artifactId>com.huawei.soa.foundation.commons</artifactId>
+			<version>${soa.foundation.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.huawei.soa.foundation</groupId>
+			<artifactId>com.huawei.soa.foundation.container</artifactId>
+			<version>${soa.foundation.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.huawei.soa.foundation</groupId>
+			<artifactId>com.huawei.soa.foundation.trace</artifactId>
+			<version>${soa.foundation.trace.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.huawei.soa.foundation</groupId>
+			<artifactId>com.huawei.soa.foundation.encryption</artifactId>
+			<version>${soa.foundation.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.2</version>
+		</dependency>
+	</dependencies>
+</project>
